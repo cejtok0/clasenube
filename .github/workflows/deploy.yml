@@ -1,29 +1,24 @@
-name: 🚀 Deploy to AlwaysData
-on:
- push:
-  branches:
-   - main
+on: push
+name: 🚀 Deploy website on push
 jobs:
- deploy:
-  runs-on: ubuntu-latest
-  steps:
-   - name: 📦 Clonar repositorio
-     uses: actions/checkout@v4
-     
-   - name: 🚀 Subir archivos al hosting vía FTPS (AlwaysData)
-     uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-     with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: ${{ secrets.FTP_TARGET }}
-        port: 21
-        protocol: ftps
-        security: strict    
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      with:
+        server: ssh-repoclase.alwaysdata.net
+        username: repoclase
+        password: Misifu123+
+        server-dir: www/
         local-dir: ./
         exclude: |
-            **/.git*
-            **/.github*
-            **/README.md
-            **/node_modules/**
-            **/.env
+          **/.git*
+          **/.github*
+          **/README.md
+          **/node_modules/**
+          **/.env
