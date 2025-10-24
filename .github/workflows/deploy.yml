@@ -16,7 +16,7 @@ jobs:
       server: ${{ secrets.FTP_SERVER }}
       username: ${{ secrets.FTP_USERNAME }}
       password: ${{ secrets.FTP_PASSWORD }}
-      server-dir: ${{ secrets.FTP_TARGET }}
+      server-dir: ${{ secrets.FTP_TARGET }}/
       port: 21
       protocol: ftps
       security: strict    
@@ -27,4 +27,3 @@ jobs:
        **/README.md
        **/node_modules/**
        **/.env
-       
